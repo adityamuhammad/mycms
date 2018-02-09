@@ -25,10 +25,11 @@ class UsersRequest extends Request
     {
         return [
             'name'=> 'required',
-            'email' => 'required',
+            'email'=> 'required',
             'role_id' => 'required',
-            'is_active' => 'required'
-            'password'=> 'required'
+            'status' => 'required',
+            'password' => 'required'
+            //
         ];
     }
 }

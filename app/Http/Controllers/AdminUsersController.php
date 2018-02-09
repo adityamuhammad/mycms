@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsersRequest;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use App\Http\Requests;
-use App\Http\Request\UsersRequest;
 
 class AdminUsersController extends Controller
 {
