@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class UsersEditRequest extends Request
+class StorePostsRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UsersEditRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,10 +24,7 @@ class UsersEditRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'role_id' => 'required',
-            'is_active' => 'required'
+            //
         ];
     }
 }

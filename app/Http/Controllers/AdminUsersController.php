@@ -7,8 +7,8 @@ use App\User;
 use App\Role;
 use App\Photo;
 use App\Http\Requests;
-use App\Http\Requests\UsersRequest;
-use App\Http\Requests\UsersEditRequest;
+use App\Http\Requests\StoreUsersRequest;
+use App\Http\Requests\UpdateUsersRequest;
 use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
@@ -43,7 +43,7 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsersRequest $request)
+    public function store(StoreUsersRequest $request)
     {
         if(trim($request->password) == ''){
             $input = $request->except('password');
@@ -99,7 +99,7 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UsersEditRequest $request, $id)
+    public function update(UpdateUsersRequest $request, $id)
     {
         $user = User::findOrFail($id);
         if(trim($request->password) == ''){
