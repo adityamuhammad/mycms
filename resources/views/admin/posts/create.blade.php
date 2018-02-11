@@ -3,8 +3,8 @@
 @section('content')
 
 
-    <h1>Create Posts</h1>
-
+    <h1>Create Post</h1>
+    <div class="row">
      {!! Form::open(['method'=> 'POST', 'action'=>'AdminPostsController@store', 'files'=> true]) !!}
 
         <div class="form-group">
@@ -32,7 +32,7 @@
         </div>
 
     {!! Form::close() !!}
-
+    </div>
     @include('includes.form_error')
     
 @stop

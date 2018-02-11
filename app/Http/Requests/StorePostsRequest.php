@@ -13,7 +13,7 @@ class StorePostsRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StorePostsRequest extends Request
     public function rules()
     {
         return [
-            //
+            'title'       => 'required',
+            'category_id' => 'required',
+            'photo_id'    => 'required',
+            'body'        => 'required'
         ];
     }
 }
