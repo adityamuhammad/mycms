@@ -1,10 +1,10 @@
-@extends('layout.admin')
+@extends('layouts.admin')
 
 @section('content')
 
     <h1>Edit Post</h1>
     <div class="row">
-         {!! Form::model($post, ['method'=> 'PATCH', 'action'=> ['AdminPostsController@update', $post->id], 'files'=> true]) !!}
+         {!! Form::model($post, ['method'=> 'PUT', 'action'=> ['AdminPostsController@update', $post->id], 'files'=> true]) !!}
 
             <div class="form-group">
                 {!! Form::label('title', 'Title: ') !!}
@@ -13,7 +13,7 @@
 
             <div class="form-group">
                 {!! Form::label('category_id', 'Category: ') !!}
-                {!! Form::select('category_id', [''=> 'Choose Categories']+ $categories, null, ['class'=>'form-control']) !!}
+                {!! Form::select('category_id', $categories, null, ['class'=>'form-control']) !!}
             </div>
 
             <div class="form-group">
