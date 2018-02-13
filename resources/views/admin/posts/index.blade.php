@@ -3,6 +3,9 @@
 @section('content');
     <h1>Admin Posts</h1>
 
+    @if(session()->has('deleted_post'))
+        <p class="alert alert-danger">{{session('deleted_post')}}</p>
+    @endif
  <table class="table table-hover table-responsive">
     <thead>
       <tr>
@@ -26,7 +29,7 @@
           <td><a href="{{ route('admin.posts.edit', $post->id) }}">{{ $post->user->name }}</a></td>
           <td>{{ $post->category ? $post->category->name : 'Uncategorized' }}</td>
           <td>{{ $post->title }}</td>
-          <td>{{ $post->body }}</td>
+          <td>{{ str_limit($post->body, 20) }}</td>
           <td>{{ $post->created_at->diffForHumans() }}</td>
           <td>{{ $post->updated_at->diffForHumans() }}</td>
         </tr>
