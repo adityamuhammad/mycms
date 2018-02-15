@@ -15,6 +15,7 @@
         <th>Category</th>
         <th>Title</th>
         <th colspan="2" class="text-center">Body</th>
+        <th>Comments</th>
         <th>Created at</th>
         <th>Updated at</th>
       </tr>
