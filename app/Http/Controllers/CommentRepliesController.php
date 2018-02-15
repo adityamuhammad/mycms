@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CommentReply;
+use Auth;
 
 use App\Http\Requests;
 
@@ -14,7 +15,7 @@ class CommentRepliesController extends Controller
         $user = Auth::user();
 
         $data = [
-            'comment_id' => $request->post_id,
+            'comment_id' => $request->comment_id,
             'author' => $user->name,
             'email' => $user->email,
             'photo' => $user->photo['file'],
