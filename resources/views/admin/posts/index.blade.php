@@ -14,7 +14,7 @@
         <th>Owner</th>
         <th>Category</th>
         <th>Title</th>
-        <th>Body</th>
+        <th colspan="2" class="text-center">Body</th>
         <th>Created at</th>
         <th>Updated at</th>
       </tr>
@@ -30,6 +30,8 @@
           <td>{{ $post->category ? $post->category->name : 'Uncategorized' }}</td>
           <td>{{ $post->title }}</td>
           <td>{{ str_limit($post->body, 20) }}</td>
+          <td><a href="{{ route('home.post', $post->id) }}">Read more</a></td>
+          <td><a href="{{ route('admin.comments.show', $post->id) }}">View Comments</a></td>
           <td>{{ $post->created_at->diffForHumans() }}</td>
           <td>{{ $post->updated_at->diffForHumans() }}</td>
         </tr>
