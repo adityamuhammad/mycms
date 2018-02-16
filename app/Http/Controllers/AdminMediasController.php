@@ -42,6 +42,11 @@ class AdminMediasController extends Controller
 
     }
 
+    public function deleteMultiple(Request $request)
+    {
+        dd($request);
+    }
+
 
 
 }
