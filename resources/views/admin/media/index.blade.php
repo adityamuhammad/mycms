@@ -53,8 +53,6 @@
 
 @section('scripts')
 
-
-
     <script>
         $(document).ready(function(){
             $('#options').click(function(){
