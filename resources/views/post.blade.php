@@ -88,7 +88,7 @@
 
                         <button class="toggle-reply btn btn-primary pull-right">Reply</button>
                         
-                        <div class="comment-reply">
+                        <div class="comment-reply col-sm-6">
 
                             {!! Form::open(['method'=> 'POST', 'action'=>'CommentRepliesController@postReply', 'files'=> true]) !!}
 
