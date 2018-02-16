@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Admin Dashboard</h1>
+    <h1 class="text-center">Welcome</h1>
 @stop
