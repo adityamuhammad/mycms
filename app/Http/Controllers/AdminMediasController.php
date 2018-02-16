@@ -44,11 +44,23 @@ class AdminMediasController extends Controller
 
     public function deleteMultiple(Request $request)
     {
-        $photos = Photo::findOrFail($request->checkBoxArray);
-        foreach($photos as $photo){
-            $photo->delete(); 
+        if(isset($request->delete_single)){
+            $this->destroy($request->photo);
+            return redirect()->back();
         }
-        return redirect()->back();
+
+        if(isset($request->delete_all) && !empty($request->checkBoxArray)){
+            $photos = Photo::findOrFail($request->checkBoxArray);
+            foreach($photos as $photo){
+                $photo->delete(); 
+            }
+            return redirect()->back();
+        } else {
+            return redirect()->back();
+        }
+
+
+        
 
     }
 

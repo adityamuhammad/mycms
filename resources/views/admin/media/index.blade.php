@@ -6,17 +6,17 @@
 
 
    @if($photos)
-       <form action="/delete/media" method="post" class="form-inline">
-        {{csrf_field()}}
-        {{method_field('delete')}}
+       <form action="delete/media" method="post" class="form-inline">
+            {{csrf_field()}}
+            {{method_field('delete')}}
          <div class="form-group">
              <select id="" name="checkBoxArray" class="form-control">
-               <option value="delete">DELETE</option>
+               <option value="">DELETE</option>
              </select>
          </div>
 
          <div class="form-group">
-             <input class="btn btn-primary" type="submit" class="form-control">
+             <input class="btn btn-primary" type="submit" name="delete_all" class="form-control">
          </div>
 
        <table class="table">
@@ -36,11 +36,10 @@
                <td><img height="50" src="{{ $photo->file }}" alt=""></td>
                <td>{{ $photo->created_at ? $photo->created_at->diffForHumans() : 'no date' }}</td>
                <td>
-                   {!! Form::model($photo, ['method'=>'DELETE', 'action' => ['AdminMediasController@destroy', $photo->id], 'files'=> true]) !!}
-                        <div class="form-group">
-                            {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
-                        </div>
-                   {!! Form::close() !!}
+                   <input type="hidden" name="photo" value="{{$photo->id}}">
+                  <div class="form-group">
+                      <input type="submit" name="delete_single" value="delete" class="btn btn-danger">
+                  </div>
                </td>
              </tr>
            @endforeach
