@@ -7,6 +7,8 @@
 
    @if($photos)
        <form action="/delete/media" method="post" class="form-inline">
+        {{csrf_field()}}
+        {{method_field('delete')}}
          <div class="form-group">
              <select id="" name="checkBoxArray" class="form-control">
                <option value="delete">DELETE</option>
@@ -36,7 +38,7 @@
                <td>
                    {!! Form::model($photo, ['method'=>'DELETE', 'action' => ['AdminMediasController@destroy', $photo->id], 'files'=> true]) !!}
                         <div class="form-group">
-                            {!! Form::submit('Delete', ['class'=>'btn btn-danger col-sm-6']) !!}
+                            {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
                         </div>
                    {!! Form::close() !!}
                </td>
@@ -47,5 +49,27 @@
        </form>
 
    @endif
+
+@stop
+
+@section('scripts')
+
+
+
+    <script>
+        $(document).ready(function(){
+            $('#options').click(function(){
+                if(this.checked){
+                    $('.checkBoxes').each(function(){
+                        this.checked = true;
+                    });
+                } else {
+                    $('.checkBoxes').each(function(){
+                        this.checked = false;
+                    });
+                }
+            });
+        });
+    </script>
 
 @stop
