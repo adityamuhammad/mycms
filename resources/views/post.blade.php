@@ -20,12 +20,12 @@
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-responsive" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/900x300'}}" alt="">
+        <img class="img-responsive" src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder() }}" alt="">
 
         <hr>
 
         <!-- Post Content -->
-        <p class="lead">{{ $post->body }}</p>
+        <p class="lead">{!! $post->body !!}</p>
 
         <hr>
         @if(Session::has('comment_message'))

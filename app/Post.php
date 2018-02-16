@@ -34,6 +34,11 @@ class Post extends Model implements SluggableInterface
     public function comments(){
         return $this->hasMany('App\Comment');
     }
+    //placeholder buat nampilin photo kalau photo nya tidak ada
+    public function photoPlaceholder(){
+        return "http://placehold.it/200x300";
+    }
+
 
 
 

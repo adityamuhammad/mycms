@@ -46,5 +46,6 @@
             
         </div>
         @include('includes.form_error')
+        @include('includes.tinyeditor')
         
 @stop
