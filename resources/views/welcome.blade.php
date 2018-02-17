@@ -19,7 +19,7 @@
                 @if($posts)
                     @foreach($posts as $post)
                 <h2>
-                    <a href="#">{{$post->title}}</a>
+                    <a href="{{ route('home.post', $post->slug) }}">{{$post->title}}</a>
                 </h2>
                 <p class="lead">
                     by <a href="#">{{$post->user->name}}</a>
@@ -38,11 +38,11 @@
 
                 <!-- Pager -->
                 <div class="row">
-        <div class="col-sm-6 col-sm-offset-5">
-            {{$posts->render()}}
+                    <div class="col-sm-6 col-sm-offset-5">
+                        {{$posts->render()}}
         
-        </div>
-      </div>
+                    </div>
+                </div>
 
             </div>
 
