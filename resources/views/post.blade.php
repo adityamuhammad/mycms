@@ -28,10 +28,7 @@
         <p class="lead">{!! $post->body !!}</p>
 
         <hr>
-        @if(Session::has('comment_message'))
-            {{session('comment_message')}}
-
-        @endif
+        @include('includes._flash')
 
         <!-- Blog Comments -->
 

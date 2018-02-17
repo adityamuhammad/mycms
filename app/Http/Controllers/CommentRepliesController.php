@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CommentReply;
 use App\Comment;
 use Auth;
+use Session;
 
 use App\Http\Requests;
 
@@ -23,7 +24,11 @@ class CommentRepliesController extends Controller
             'body' => $request->body
         ];
         CommentReply::create($data);
-        $request->session()->flash('comment_message', 'Your reply has been submited, wait administrator to approve it');
+        $request->session()->flash('comment_message', '');
+        Session::flash("flash_notification", [
+            "level" => "info",
+            "message" => "Your reply has been submited, wait administrator to approve it"
+        ]);
         return redirect()->back();
         
     }

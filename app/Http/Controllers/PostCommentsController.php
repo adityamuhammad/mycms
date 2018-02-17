@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Comment;
 use App\Post;
 use Auth;
+use Session;
 
 class PostCommentsController extends Controller
 {
@@ -53,7 +54,10 @@ class PostCommentsController extends Controller
             'body' => $request->body
         ];
         Comment::create($data);
-        $request->session()->flash('comment_message', 'Your comment has been submited, wait administrator to approve it');
+        Session::flash("flash_notification", [
+            "level" => "info",
+            "message" => "Your comment has been submited, wait administrator to approve it"
+        ]);
         return redirect()->back();
     }
 

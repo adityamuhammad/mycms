@@ -20,7 +20,7 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(2);
 
         return view('admin.users.index', compact('users'));
     }
@@ -60,7 +60,11 @@ class AdminUsersController extends Controller
 
             $input['photo_id'] = $photo->id;
         }
-        User::create($input);
+        $user = User::create($input);
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "message" => "$user->name has been created"
+        ]);
 
 
         return redirect('admin/users');
@@ -120,6 +124,10 @@ class AdminUsersController extends Controller
 
         }
         $user->update($input);
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "message" => "$user->name has been updated"
+        ]);
 
         return redirect('admin/users');
     }
@@ -136,8 +144,10 @@ class AdminUsersController extends Controller
         unlink(public_path() . $user->photo->file);
         $user->delete();
 
-        Session::flash('deleted_user', 'The user has been deleted ');
-
+        Session::flash("flash_notification", [
+            "level" => "danger",
+            "message" => "$user->name has been deleted"
+        ]);
         return redirect('admin/users');
 
     }
