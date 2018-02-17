@@ -21,7 +21,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(5);
         return view('admin.posts.index', compact('posts'));
         //
     }
@@ -49,6 +49,7 @@ class AdminPostsController extends Controller
         $input = $request->all();
 
         $user = Auth::user();
+
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
@@ -56,6 +57,12 @@ class AdminPostsController extends Controller
             $input['photo_id'] = $photo->id;
         }
         $user->posts()->create($input);
+
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "message" => "Post has been saved"
+        ]);
+
         return redirect('admin/posts');
         
 
@@ -107,6 +114,10 @@ class AdminPostsController extends Controller
         }
 
         Auth::user()->posts()->whereId($id)->first()->update($input);
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "message" => "Post has been updated"
+        ]);
         return redirect('admin/posts');
 
         
@@ -124,7 +135,10 @@ class AdminPostsController extends Controller
         unlink(public_path() . $post->photo->file);
         $post->delete();
 
-        Session::flash('deleted_post', 'Post has been deleted ');
+        Session::flash("flash_notification", [
+            "level" => "danger",
+            "message" => "$post->title has been deleted"
+        ]);
         return redirect('admin/posts');
         
     }

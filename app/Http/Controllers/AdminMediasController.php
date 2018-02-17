@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Photo;
+use Session;
 
 class AdminMediasController extends Controller
 {
@@ -38,6 +39,11 @@ class AdminMediasController extends Controller
         unlink(public_path() . $photo->file);
         $photo->delete();
 
+        Session::flash("flash_notification", [
+                "level" => "success",
+            "message" => "Photo has been deleted"
+        ]);
+
         return redirect('admin/media');
 
     }
@@ -54,8 +60,17 @@ class AdminMediasController extends Controller
             foreach($photos as $photo){
                 $photo->delete(); 
             }
+            Session::flash("flash_notification", [
+                "level" => "success",
+                "message" => "Photos has been deleted"
+            ]);
             return redirect()->back();
         } else {
+            Session::flash("flash_notification", [
+                "level" => "danger",
+                "message" => "Before you do that, Please select the photo"
+            ]);
+
             return redirect()->back();
         }
 

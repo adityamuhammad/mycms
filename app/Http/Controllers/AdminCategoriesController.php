@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Category;
+use Session;
 
 class AdminCategoriesController extends Controller
 {
@@ -29,6 +30,10 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         Category::create($request->all());
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "message" => "Category has been saved"
+        ]);
         return redirect('admin/categories');
 
         //
@@ -56,7 +61,6 @@ class AdminCategoriesController extends Controller
         $categories = Category::all();
         $category = Category::findOrFail($id);
         return view('admin.categories.edit',compact('categories', 'category'));
-        //
     }
 
     /**
@@ -69,6 +73,10 @@ class AdminCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         Category::findOrFail($id)->update($request->all());
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "message" => "Category has been updated"
+        ]);
         return redirect('admin/categories');
         //
     }
@@ -81,7 +89,12 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
+        $category = Category::findOrFail($id);
+        $category->delete();
+        Session::flash("flash_notification", [
+            "level" => "danger",
+            "message" => "$category->name has been deleted"
+        ]);
         return redirect('admin/categories');
         //
     }
