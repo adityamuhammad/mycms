@@ -20,7 +20,7 @@ Route::get('/admin', function(){
     return view('admin.index');
 });
 
-Route::get('/post/{id}', [
+Route::get('/post/{slug}', [
     'as'=>'home.post',
     'uses' =>'HomePostController@post']);
 
