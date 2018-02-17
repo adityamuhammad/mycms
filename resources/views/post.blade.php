@@ -20,7 +20,7 @@
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-responsive" src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder() }}" alt="">
+        <img class="img-responsive" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/900x300' }}" alt="">
 
         <hr>
 

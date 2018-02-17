@@ -1,17 +1,97 @@
-@extends('layouts.app')
+@extends('layouts.blog-home')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
 
-                <div class="panel-body">
-                    Your Application's Landing Page.
-                </div>
-            </div>
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <h1 class="page-header">
+                    Page Heading
+                    <small>Secondary Text</small>
+                </h1>
+
+                <!-- First Blog Post -->
+                @if($posts)
+                    @foreach($posts as $post)
+                <h2>
+                    <a href="#">{{$post->title}}</a>
+                </h2>
+                <p class="lead">
+                    by <a href="#">{{$post->user->name}}</a>
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on {{$post->created_at->diffForHumans()}}</p>
+                <hr>
+                <img class="img-responsive" src="{{ $post->photo ? $post->photo->file :'http://placehold.it/900x300'}}" alt="">
+                <hr>
+                <p>{{str_limit($post->body, 60)}}</p>
+                <a class="btn btn-primary" href="{{ route('home.post', $post->slug) }}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                <hr>
+                    @endforeach
+                @endif
+
+
+                <!-- Pager -->
+                <div class="row">
+        <div class="col-sm-6 col-sm-offset-5">
+            {{$posts->render()}}
+        
         </div>
-    </div>
-</div>
+      </div>
+
+            </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Blog Search Well -->
+                <div class="well">
+                    <h4>Blog Search</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div>
+                    <!-- /.input-group -->
+                </div>
+
+                <!-- Blog Categories Well -->
+                <div class="well">
+                    <h4>Blog Categories</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                @if($categories)
+                                    @foreach($categories as $category)
+                                        <ul>
+                                            <li><a href="#">{{$category->name}}</a></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
+                        </div>
+                        <!-- /.col-lg-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <!-- Side Widget Well -->
+                <div class="well">
+                    <h4>Side Widget Well</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+
 @endsection
