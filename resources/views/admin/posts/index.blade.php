@@ -1,6 +1,6 @@
-@extends('layouts.admin');
+@extends('layouts.admin')
 
-@section('content');
+@section('content')
     <h1>Admin Posts</h1>
 
     @if(session()->has('deleted_post'))

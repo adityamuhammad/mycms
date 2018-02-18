@@ -29,6 +29,9 @@ class AdminCategoriesController extends Controller
     
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
         Category::create($request->all());
         Session::flash("flash_notification", [
             "level" => "success",

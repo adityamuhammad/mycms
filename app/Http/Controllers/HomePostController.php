@@ -11,7 +11,7 @@ use App\Category;
 class HomePostController extends Controller
 {
     public function homePost(){
-        $categories = Category::paginate(3);
+        $categories = Category::all();
         $posts = Post::paginate(2);
         return view('welcome', compact('posts', 'categories'));
     }
@@ -19,7 +19,7 @@ class HomePostController extends Controller
     public function post($slug){
         $post = Post::findBySlugOrFail($slug);
         $comments = $post->comments()->whereIsActive(1)->get();
-        $categories = Category::paginate(3);
+        $categories = Category::all();
         return view('post', compact('post', 'comments', 'categories'));
     }
 }
