@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     <div class="form-group">
-                        <a class="btn btn-primary" href="{{ url("authors/home/post/create") }}">Create Post</a>
+                        <a class="btn btn-primary" href="{{ url("author/home/post/create") }}">Create Post</a>
                     </div>
                     Your post
                     <table class="table table-hover">
@@ -29,7 +29,7 @@
                               @foreach($posts as $post)
                                 <tr>
                                   <td><img height="50" src="{{ $post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}" alt=""></td>
-                                  <td><a href="{{ route('admin.posts.edit', $post->id) }}">{{ $post->user->name }}</a></td>
+                                  <td>{{ $post->user->name }}</td>
                                   <td>{{ $post->category ? $post->category->name : 'Uncategorized' }}</td>
                                   <td>{{ $post->title }}</td>
                                   <td>{{ str_limit($post->body, 20) }}</td>
