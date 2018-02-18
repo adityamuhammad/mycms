@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     <div class="form-group">
-                        <a class="btn btn-primary" href="">Create Post</a>
+                        <a class="btn btn-primary" href="{{ url("authors/home/post/create") }}">Create Post</a>
                     </div>
                     Your post
                     <table class="table table-hover">
@@ -19,7 +19,7 @@
                               <th>Author</th>
                               <th>Category</th>
                               <th>Title</th>
-                              <th>Body</th>
+                              <th class="text-center" colspan="2">Body</th>
                               <th>Created at</th>
                               <th>Updated at</th>
                             </tr>
@@ -34,7 +34,6 @@
                                   <td>{{ $post->title }}</td>
                                   <td>{{ str_limit($post->body, 20) }}</td>
                                   <td><a href="{{ route('home.post', $post->slug) }}">Read more</a></td>
-                                  <td><a href="{{ route('admin.comments.show', $post->id) }}">View Comments</a></td>
                                   <td>{{ $post->created_at->diffForHumans() }}</td>
                                   <td>{{ $post->updated_at->diffForHumans() }}</td>
                                 </tr>

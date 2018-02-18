@@ -42,6 +42,8 @@ Route::group(['middleware'=> 'auth'], function(){
 });
 Route::group(['middleware'=> 'author'], function(){
     Route::get('authors/home/post', 'AuthorPostsController@index');
+    Route::get('authors/home/post/create', 'AuthorPostsController@create');
+    Route::post('author/home/post', 'AuthorPostsController@store');
 });
 
 
