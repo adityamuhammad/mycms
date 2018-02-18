@@ -17,7 +17,8 @@ class Author
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::user()->isAuthor){
+            $user = Auth::user();
+            if($user->is_active == 1 && $user->role->name == "author"){
                 return $next($request);
             }
         }
