@@ -10,7 +10,7 @@
         <!-- Author -->
         <p class="lead">
             by <a href="#">{{ $post->user->name }}</a>
-        </p>
+        </p><small>{{$post->user->role->name}}</small>
 
         <hr>
 
