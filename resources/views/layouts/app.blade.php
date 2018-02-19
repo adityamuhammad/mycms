@@ -64,6 +64,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/author/home/post') }}"><i class="fa fa-btn glyphicon glyphicon-pencil"></i>Create Post</a></li>
+                                <li><a href="{{ url('/settings/profile') }}"><i class="fa fa-gear fa-fw"></i>Settings</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
@@ -75,6 +76,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/admin') }}"><i class="fa fa-btn glyphicon glyphicon-user"></i>Go to admin page</a></li>
+                                <li><a href="{{ url('/settings/profile') }}"><i class="fa fa-gear fa-fw"></i>Settings</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
@@ -86,6 +88,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/settings/profile') }}"><i class="fa fa-gear fa-fw"></i>Settings</a></li>
                             </ul>
                         </li>
                     @endif

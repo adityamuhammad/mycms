@@ -42,6 +42,7 @@ Route::group(['middleware'=>'admin'], function(){
 Route::group(['middleware'=> 'auth'], function(){
     Route::post('comment', 'PostCommentsController@store');
     Route::post('comment/reply', 'CommentRepliesController@postReply');
+    Route::get('settings/profile', 'SettingsController@profile');
 });
 
 Route::group(['middleware'=> 'author'], function(){
