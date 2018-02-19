@@ -12,15 +12,35 @@
 */
 
 Route::get('/', 'HomePostController@homePost');
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-
-
 Route::get('/post/{slug}', [
     'as'=>'home.post',
-    'uses' =>'HomePostController@post']);
+    'uses' =>'HomePostController@post'
+]);
+
+Route::group(['middleware'=> 'auth'], function(){
+    Route::post('comment', 'PostCommentsController@store');
+    Route::post('comment/reply', 'CommentRepliesController@postReply');
+    Route::get('settings/u/profile/', 'SettingsController@profile');
+    Route::put('settings/profile/{id}', 'SettingsController@updateProfile');
+});
+
+Route::group(['middleware'=> 'author'], function(){
+    Route::get('author/home/post', 'AuthorPostsController@index');
+    Route::get('author/home/post/create', 'AuthorPostsController@create');
+    Route::post('author/home/post', 'AuthorPostsController@store');
+    Route::get('author/home/post/{id}/edit',[
+        'as' => 'author.edit.post',
+        'uses' => 'AuthorPostsController@edit'
+    ]);
+    Route::put('author/home/post/{id}', 'AuthorPostsController@update');
+    Route::delete('author/home/post{id}', 'AuthorPostsController@destroy');
+    
+});
 
 Route::group(['middleware'=>'admin'], function(){
 
@@ -39,23 +59,8 @@ Route::group(['middleware'=>'admin'], function(){
 
 });
 
-Route::group(['middleware'=> 'auth'], function(){
-    Route::post('comment', 'PostCommentsController@store');
-    Route::post('comment/reply', 'CommentRepliesController@postReply');
-    Route::get('settings/profile', 'SettingsController@profile');
-});
 
-Route::group(['middleware'=> 'author'], function(){
-    Route::get('author/home/post', 'AuthorPostsController@index');
-    Route::get('author/home/post/create', 'AuthorPostsController@create');
-    Route::post('author/home/post', 'AuthorPostsController@store');
-    Route::get('author/home/post/{id}/edit',[
-        'as' => 'author.edit.post',
-        'uses' => 'AuthorPostsController@edit'
-    ]);
-    Route::put('author/home/post/{id}', 'AuthorPostsController@update');
-    Route::delete('author/home/post{id}', 'AuthorPostsController@destroy');
-    
-});
+
+
 
 
