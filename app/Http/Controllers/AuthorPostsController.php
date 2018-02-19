@@ -50,7 +50,7 @@ class AuthorPostsController extends Controller
             "message" => "Post has been saved"
         ]);
 
-        return redirect('authors/home/post');
+        return redirect('author/home/post');
         
 
     }
@@ -104,7 +104,18 @@ class AuthorPostsController extends Controller
      */
     public function destroy($id)
     {
-         return "its works";
+        $post = Post::findOrFail($id);
+        if($post->photo->file){
+            unlink(public_path() . $post->photo->file);
+        } 
+        $post->delete();
+
+        Session::flash("flash_notification", [
+            "level" => "danger",
+            "message" => "$post->title has been deleted"
+        ]);
+        return redirect('author/home/post');
+
     }
 
     

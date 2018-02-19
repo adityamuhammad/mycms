@@ -50,7 +50,7 @@ Route::group(['middleware'=> 'author'], function(){
         'uses' => 'AuthorPostsController@edit'
     ]);
     Route::put('author/home/post/{id}', 'AuthorPostsController@update');
-    Route::delete('author/home/post', 'AuthorPostsController@destroy');
+    Route::delete('author/home/post{id}', 'AuthorPostsController@destroy');
     
 });
 
