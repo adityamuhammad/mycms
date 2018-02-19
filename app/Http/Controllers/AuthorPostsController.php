@@ -60,7 +60,11 @@ class AuthorPostsController extends Controller
         $post = Post::findOrFail($id);
         $categories = Category::lists('name', 'id')->all();
         if (Gate::denies('edit-post', $post)) {
-            return redirect('/');
+        Session::flash("flash_notification", [
+            "level" => "danger",
+            "message" => "Oops!"
+        ]);
+            return redirect()->back();
         }
             return view('authors.edit', compact('post', 'categories'));
         

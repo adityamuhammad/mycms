@@ -28,7 +28,9 @@ Route::group(['middleware'=>'admin'], function(){
     Route::resource('/admin/posts', 'AdminPostsController');
     Route::resource('/admin/categories', 'AdminCategoriesController');
     Route::resource('/admin/media', 'AdminMediasController');
-    Route::resource('/admin/comments', 'PostCommentsController');
+    Route::resource('/admin/comments', 'PostCommentsController', ['except' => [
+        'store'
+    ]]);
     Route::resource('/admin/comment/replies', 'CommentRepliesController');
     Route::delete('admin/delete/media', 'AdminMediasController@deleteMultiple');
     Route::get('/admin', function(){
@@ -38,6 +40,7 @@ Route::group(['middleware'=>'admin'], function(){
 });
 
 Route::group(['middleware'=> 'auth'], function(){
+    Route::post('comment', 'PostCommentsController@store');
     Route::post('comment/reply', 'CommentRepliesController@postReply');
 });
 
