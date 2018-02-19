@@ -83,7 +83,9 @@
             </div>
         </div>
     </nav>
-
+    <div class="col-md-10 col-md-offset-1">
+        @include('includes._flash')
+    </div>
     @yield('content')
 
     <!-- JavaScripts -->

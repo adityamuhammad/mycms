@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostsRequest;
+use Illuminate\Http\Request;
+
 use App\Http\Requests;
+use App\Http\Requests\StorePostsRequest;
 use App\Post;
+use App\User;
 use App\Photo;
 use App\Category;
 use Auth;
 use Session;
+use Gate;
 
 class AuthorPostsController extends Controller
 {
@@ -55,11 +59,21 @@ class AuthorPostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::lists('name', 'id')->all();
-        return view('authors.posts.edit', compact('post','categories'));
+        if (Gate::denies('edit-post', $post)) {
+            return redirect('/');
+        }
+            return view('authors.edit', compact('post', 'categories'));
+        
+
+
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
+        $post = Post::find($id);
+        if (Gate::denies('update-post', $post)) {
+            return redirect('/');
+        }
         $input = $request->all();
 
         if($file = $request->file('photo_id')){
@@ -77,7 +91,7 @@ class AuthorPostsController extends Controller
             "level" => "success",
             "message" => "Post has been updated"
         ]);
-        return redirect('admin/posts');
+        return redirect('author/home/post');
 
         
     }
@@ -90,18 +104,7 @@ class AuthorPostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        if($post->photo->file){
-            unlink(public_path() . $post->photo->file);
-        } 
-        $post->delete();
-
-        Session::flash("flash_notification", [
-            "level" => "danger",
-            "message" => "$post->title has been deleted"
-        ]);
-        return redirect('admin/posts');
-        
+         return "its works";
     }
 
     

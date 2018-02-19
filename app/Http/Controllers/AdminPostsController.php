@@ -10,6 +10,7 @@ use App\Post;
 use App\Photo;
 use App\Category;
 use Auth;
+use Gate;
 use Session;
 
 class AdminPostsController extends Controller
@@ -101,6 +102,14 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $post = Post::find($id);
+        if (Gate::denies('update-post', $post)) {
+            Session::flash("flash_notification", [
+                "level" => "danger",
+                "message" => "Only the owner can modify this post"
+            ]);
+            return redirect('/admin/posts');
+        }
         $input = $request->all();
 
         if($file = $request->file('photo_id')){

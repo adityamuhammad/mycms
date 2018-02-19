@@ -40,10 +40,18 @@ Route::group(['middleware'=>'admin'], function(){
 Route::group(['middleware'=> 'auth'], function(){
     Route::post('comment/reply', 'CommentRepliesController@postReply');
 });
+
 Route::group(['middleware'=> 'author'], function(){
     Route::get('author/home/post', 'AuthorPostsController@index');
     Route::get('author/home/post/create', 'AuthorPostsController@create');
     Route::post('author/home/post', 'AuthorPostsController@store');
+    Route::get('author/home/post/{id}/edit',[
+        'as' => 'author.edit.post',
+        'uses' => 'AuthorPostsController@edit'
+    ]);
+    Route::put('author/home/post/{id}', 'AuthorPostsController@update');
+    Route::delete('author/home/post', 'AuthorPostsController@destroy');
+    
 });
 
 
