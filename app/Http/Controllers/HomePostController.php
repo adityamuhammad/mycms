@@ -22,4 +22,13 @@ class HomePostController extends Controller
         $categories = Category::all();
         return view('post', compact('post', 'comments', 'categories'));
     }
+
+    public function search(Request $request){
+        $keyword = $request->search;
+        $categories = Category::all();
+        $posts = Post::where('title', 'like','%'.$keyword.'%')->paginate(2);
+        $posts->appends($request->only('search'));
+
+        return view('welcome', compact('posts', 'categories'));
+    }
 }

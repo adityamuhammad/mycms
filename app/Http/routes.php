@@ -22,6 +22,11 @@ Route::get('/post/{slug}', [
     'uses' =>'HomePostController@post'
 ]);
 
+Route::get('post/',[
+    'as' => 'post.search',
+    'uses' => 'HomePostController@search'
+]); 
+
 Route::group(['middleware'=> 'auth'], function(){
     Route::post('comment', 'PostCommentsController@store');
     Route::post('comment/reply', 'CommentRepliesController@postReply');
