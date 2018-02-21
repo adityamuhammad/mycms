@@ -24,16 +24,15 @@ class SettingsController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users,email,' . $user->id,
-            'photo_id' => 'required'
+            'photo_id' => 'image'
         ]);
         if(trim($request->password) == ''){
             $input = $request->except('password');
 
         } 
-            $input =  $request->all();
-            $input['role_id'] = 3;
-            $input['is_active'] = 1;
-            $input['password'] = bcrypt($request->password);
+        $input =  $request->all();
+        $input['is_active'] = 1;
+        $input['password'] = bcrypt($request->password);
         
 
         if($file = $request->file('photo_id')){
@@ -43,7 +42,6 @@ class SettingsController extends Controller
             $photo = Photo::create(['file'=> $name]);
 
             $input['photo_id'] = $photo->id;
-
         }
         $user->update($input);
         Session::flash("flash_notification", [

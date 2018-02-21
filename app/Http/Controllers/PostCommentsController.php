@@ -50,11 +50,15 @@ class PostCommentsController extends Controller
             'post_id' => $request->post_id,
             'author' => $user->name,
             'email' => $user->email,
-            'photo' => $user->photo['file'],
+            'photo' => '',
             'body' => $request->body
         ];
+        if(!empty($user->photo['file'])){
+            $data['photo'] = $user->photo['file'];
+        }
+
         Comment::create($data);
-        Session::flash("flash_notification", [
+                Session::flash("flash_notification", [
             "level" => "info",
             "message" => "Your comment has been submited, wait administrator to approve it"
         ]);

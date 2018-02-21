@@ -20,9 +20,12 @@ class CommentRepliesController extends Controller
             'comment_id' => $request->comment_id,
             'author' => $user->name,
             'email' => $user->email,
-            'photo' => $user->photo['file'],
+            'photo' => '',
             'body' => $request->body
         ];
+        if(!empty($user->photo['file'])){
+            $data['photo'] = $user->photo['file'];
+        }
         CommentReply::create($data);
         $request->session()->flash('comment_message', '');
         Session::flash("flash_notification", [
