@@ -61,7 +61,7 @@ class AdminPostsController extends Controller
 
         Session::flash("flash_notification", [
             "level" => "success",
-            "message" => "Post has been saved"
+            "message" => "Post has been created"
         ]);
 
         return redirect('admin/posts');
