@@ -36,6 +36,6 @@ class HomePostController extends Controller
         $category = Category::findOrFail($id);
         $categories = Category::all();
         $posts = Post::where('category_id', '=' , $category->id)->paginate();
-        return view('post-category', compact('posts', 'categories'));
+        return view('welcome', compact('posts', 'categories'));
     }
 }

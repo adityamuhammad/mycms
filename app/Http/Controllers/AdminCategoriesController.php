@@ -35,7 +35,7 @@ class AdminCategoriesController extends Controller
         Category::create($request->all());
         Session::flash("flash_notification", [
             "level" => "success",
-            "message" => "Category has been saved"
+            "message" => "Category has been created"
         ]);
         return redirect('admin/categories');
 
