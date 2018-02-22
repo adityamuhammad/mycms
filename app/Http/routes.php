@@ -27,6 +27,11 @@ Route::get('post/',[
     'uses' => 'HomePostController@search'
 ]); 
 
+Route::get('post/category/{id}', [
+    'as' => 'post.category',
+    'uses' => 'HomePostController@category'
+]);
+
 Route::group(['middleware'=> 'auth'], function(){
     Route::post('comment', 'PostCommentsController@store');
     Route::post('comment/reply', 'CommentRepliesController@postReply');
